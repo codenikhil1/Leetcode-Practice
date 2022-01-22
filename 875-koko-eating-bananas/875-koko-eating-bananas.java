@@ -1,39 +1,33 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        int len = piles.length;
-        int max = Integer.MIN_VALUE;
-        for(int temp : piles){
-            max = Math.max(temp,max);
+        // Initalize the left and right boundaries 
+        int left = 1, right = 1;
+        for (int pile : piles) {
+            right = Math.max(right, pile);
         }
-        int left = 1;
-        int right = max;
-        
-        return binarySearch(left,right,piles,h);
-        
-    }
-    
-    public int binarySearch(int left,int right,int[] piles,int h){
-        int ans = Integer.MAX_VALUE;
-        int len = piles.length;
-        int i = 0;
-        int count = 0;
-        while(left < right){
-            int mid = (left+right)/2;
-            count = 0;
-          
-            for(int pile : piles){
-                count += Math.ceil((double)pile/mid);
+
+        while (left < right) {
+            // Get the middle index between left and right boundary indexes.
+            // hourSpent stands for the total hour Koko spends.
+            int middle = (left + right) / 2;
+            int hourSpent = 0;
+
+            // Iterate over the piles and calculate hourSpent.
+            // We increase the hourSpent by ceil(pile / middle)
+            for (int pile : piles) {
+                hourSpent += Math.ceil((double) pile / middle);
             }
-           
-            
-            
-            if(count <= h){
-                right = mid;
-            }else
-                left = mid + 1;
+
+            // Check if middle is a workable speed, and cut the search space by half.
+            if (hourSpent <= h) {
+                right = middle;
+            } else {
+                left = middle + 1;
+            }
         }
-                
-        
+
+        // Once the left and right boundaries coincide, we find the target value,
+        // that is, the minimum workable eating speed.
         return right;
     }
 }
