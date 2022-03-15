@@ -8,6 +8,7 @@ class Solution {
     }
     
     public int climb(int n,int cur,int[] arr){
+        
         if(cur < arr.length && arr[cur] != -1) return arr[cur];
         
         if(cur > n) return 0;
