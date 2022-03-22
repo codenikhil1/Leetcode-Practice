@@ -38,9 +38,13 @@ class Solution{
         
         int consider = 0;
         int currentValue = prices[current];
+        int currentPieceLenght = current+1;
         
-        if((current+1) <= size)
-            consider = currentValue + maxValue(prices,size-(current+1),current,dp);
+        //doing currentIndex +1 here cause
+        //index are 0 based but index 0 reprents rod of size 1
+        //index  1 represent rode of size 2 
+        if(currentPieceLenght <= size)
+            consider = currentValue + maxValue(prices,size-currentPieceLenght,current,dp);
             
         int dontConsider = maxValue(prices,size,current+1,dp);
         
