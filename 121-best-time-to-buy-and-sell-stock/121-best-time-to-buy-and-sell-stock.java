@@ -1,28 +1,33 @@
 class Solution {
     public int maxProfit(int[] prices) {
-       // Integer[][][] dp = new Integer[current+1][2][2]; 
-        return profit(prices,0,0,1,new HashMap<String,Integer>());
+        Integer[][][] dp = new Integer[prices.length+1][2][2]; 
+        return profit(prices,0,0,1,dp);
     }
     
-    private int profit(int[] prices,int current,int canIBuy,int                                                             noOfTransaction,HashMap<String,Integer> map){
+    private int profit(int[] prices,int current,int canIBuy,int                                                             noOfTransaction,Integer[][][] dp){
         if(current >= prices.length || noOfTransaction == 0 ) return 0;
         
         int buyStock = 0;
         int sellStock = 0;
         
-        String key = current + "-" + canIBuy + "-" + noOfTransaction;
+        if(dp[current][canIBuy][noOfTransaction] != null)
+            return dp[current][canIBuy][noOfTransaction];
+        //String key = current + "-" + canIBuy + "-" + noOfTransaction;
         
-        if(map.containsKey(key)) return map.get(key);
+        //if(map.containsKey(key)) return map.get(key);
         
-        int Idle = profit(prices,current+1,canIBuy,noOfTransaction,map);
+        int Idle = profit(prices,current+1,canIBuy,noOfTransaction,dp);
         
         if(canIBuy == 0)
-            buyStock = -prices[current]+profit(prices,current+1,1,1,map);
+            buyStock = -prices[current]+profit(prices,current+1,1,1,dp);
         else
-            sellStock = prices[current]+profit(prices,current+1,0,0,map);
+            sellStock = prices[current]+profit(prices,current+1,0,0,dp);
         
-        map.put(key,Math.max(Idle,Math.max(buyStock,sellStock)));
-        return map.get(key);
+        dp[current][canIBuy][noOfTransaction] = Math.max(Idle,Math.max(buyStock,sellStock));
+        
+        //map.put(key,Math.max(Idle,Math.max(buyStock,sellStock)));
+        
+        return dp[current][canIBuy][noOfTransaction];
         
             
         
