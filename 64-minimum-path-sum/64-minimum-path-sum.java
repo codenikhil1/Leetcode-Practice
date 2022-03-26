@@ -1,9 +1,9 @@
 class Solution {
     public int minPathSum(int[][] grid) {
-        int row = grid.length;
-        int col = grid[0].length;
-        Integer dp[][] = new Integer[row+1][col+1];
-        return minPath(0,0,row,col,grid,dp);
+        int rowLen = grid.length;
+        int colLen = grid[0].length;
+        Integer dp[][] = new Integer[rowLen+1][colLen+1];
+        return minPath(0,0,rowLen,colLen,grid,dp);
     }
     
     private int minPath(int row,int col,int m,int n,int[][] grid,Integer[][] dp){
