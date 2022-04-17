@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class Main {
+
+public static int solution(int[] arr) {
+
+    int ans = 0;
+    HashMap map = new HashMap<>();
+    int z0 = 0;
+    int z1 = 0;
+    int z2 = 0;
+    map.put("0#0",-1);
+    for(int i = 0 ; i < arr.length ; i++ ){
+        int currentNum = arr[i];
+        if(currentNum == 0)
+          z0++;
+        else if (currentNum == 1)
+          z1++;
+        else
+          z2++;
+
+        String key = (z1-z0) + "#" + (z2-z1);
+
+        if(map.containsKey(key)){
+          ans = Math.max(ans,i - map.get(key)) ;
+        }else{
+          map.put(key,i);
+        }
+}
+
+return ans;
+}
+
+public static void main(String[] args) {
+      Scanner scn = new Scanner(System.in);
+      int n = scn.nextInt();
+      int[] arr = new int[n];
+      for (int i = 0; i < n; i++) {
+      arr[i] = scn.nextInt();
+}
+      System.out.println(solution(arr));
+}
+
+}
