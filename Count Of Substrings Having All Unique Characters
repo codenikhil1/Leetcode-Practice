@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class Main {
+
+ public static int solution(String s) {
+  int ans = 0;
+  HashMap map = new HashMap<>();
+  int release = 0;
+
+  for(int aquire = 0 ; aquire < s.length() ; aquire++){
+    char currentChar = s.charAt(aquire);
+
+    while(release < aquire && map.containsKey(currentChar)){
+          char discartChar = s.charAt(release);
+          map.put(discartChar,map.get(discartChar)-1);
+
+          if(map.get(discartChar) == 0)
+          map.remove(discartChar);
+
+          release++;
+    }
+  
+  map.put(currentChar,1);
+
+  ans += aquire - release + 1;
+}
+
+  return ans;
+}
+ 
+ public static void main(String[] args) {
+  Scanner scn = new Scanner(System.in);
+  String str = scn.next();
+  System.out.println(solution(str));
+ }
+
+}
