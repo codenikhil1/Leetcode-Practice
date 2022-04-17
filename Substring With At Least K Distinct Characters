@@ -38,6 +38,8 @@ public class Solution {
         }
 
         long n = str.length() ;
+        
+        // all substrings (-)minus atmost k-1 distint characters substring = substring with atleat k distingt characters
         return n*(n+1)/2 - ans;
         
     }
