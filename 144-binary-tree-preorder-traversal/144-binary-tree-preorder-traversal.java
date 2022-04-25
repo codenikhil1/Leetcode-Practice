@@ -30,7 +30,6 @@ class Solution {
         stack.add(root);
         while(stack.size() != 0){
             TreeNode currentNode = stack.pop();
-            if(currentNode != null)
                 list.add(currentNode.val);
             if(currentNode.right != null)
                 stack.add(currentNode.right);
