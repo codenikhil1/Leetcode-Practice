@@ -32,9 +32,9 @@ class Solution {
             TreeNode currentNode = stack.pop();
                 list.add(currentNode.val);
             if(currentNode.right != null)
-                stack.add(currentNode.right);
+                stack.push(currentNode.right);
             if(currentNode.left != null)
-                stack.add(currentNode.left);
+                stack.push(currentNode.left);
         }
         return list;
     }
