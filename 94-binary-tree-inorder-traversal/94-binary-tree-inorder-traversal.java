@@ -19,9 +19,27 @@ class Solution {
         if(root == null)
            return list;
         
-        preorder(root,list);
+       /* preorder(root,list);
+        return list; */
+        
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+        while(curr != null || !stack.isEmpty()){
+           
+            while(curr != null){
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            list.add(curr.val);
+            curr = curr.right;
+
+            
+        }
         return list;
     }
+    
+    
     //using recursion
     public List<Integer> preorder(TreeNode root,List<Integer> list){
         if(root.left != null)
