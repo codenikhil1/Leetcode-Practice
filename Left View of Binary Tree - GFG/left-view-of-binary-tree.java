@@ -124,25 +124,29 @@ class Tree
     //Function to return list containing elements of left view of binary tree.
     ArrayList<Integer> leftView(Node root)
     {
-        HashMap<Integer,Integer> map = new HashMap<>();
+        //HashMap<Integer,Integer> map = new HashMap<>();
         ArrayList<Integer> ans = new ArrayList<>();
-        left(map,ans,root,0);
-      // Your code here
+        //left(map,ans,root,0);
+        left(ans,root,0);
+      
       
       return ans;
     }
     
-    public void left(HashMap<Integer,Integer> map,ArrayList<Integer> ans,Node node, int currentLevel){
+    public void left(ArrayList<Integer> ans,Node node, int currentLevel){
         if(node == null)
          return;
          
-        if(!map.containsKey(currentLevel)){
-            map.put(currentLevel,node.data);
+        // if(!map.containsKey(currentLevel)){
+        //     map.put(currentLevel,node.data);
+        //     ans.add(node.data);
+        // }
+        if(ans.size() == currentLevel){
             ans.add(node.data);
         }
         
-        left(map,ans,node.left,currentLevel+1);
-        left(map,ans,node.right,currentLevel+1);
+        left(ans,node.left,currentLevel+1);
+        left(ans,node.right,currentLevel+1);
         
     }
 }
