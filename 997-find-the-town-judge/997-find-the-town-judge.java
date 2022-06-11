@@ -1,5 +1,8 @@
 class Solution {
     public int findJudge(int n, int[][] trusts) {
+        //taking n+1 cause graph in starting from 1
+        //so lets see n is given 4 and if we make arr[n] then it will be 0 1 2 3
+        //thats why taking n+1
         int[] inDegree = new int[n+1];
         int[] outDegree = new int[n+1];
         
