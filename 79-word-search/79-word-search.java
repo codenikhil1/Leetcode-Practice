@@ -17,12 +17,13 @@ class Solution {
 }
         
     public boolean search(char[][] board,int m,int n,int row,int col,String word,int pos){
-        if(row < 0 || col < 0 || row >= m || col >= n || pos >= word.length() 
+        if(pos >= word.length())
+            return true;
+        
+        if(row < 0 || col < 0 || row >= m || col >= n 
            || board[row][col] != word.charAt(pos) || board[row][col] == '.' )
             return false;
-        
-        if(pos == word.length() -1 && board[row][col] == word.charAt(pos))
-            return true;
+    
         
         char temp = board[row][col];
         board[row][col] = '.';
