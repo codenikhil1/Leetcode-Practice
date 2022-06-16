@@ -7,8 +7,7 @@ class Solution {
         
         for(int i = 0 ; i < m ; i++ ){
             for(int j = 0 ; j < n ; j++ ){
-                boolean visited[][] = new boolean[m][n];
-                    if(search(board,m,n,i,j,word,0,visited))
+                    if(board[i][j] == word.charAt(0) && search(board,m,n,i,j,word,0))
                         return true;
         }
             
@@ -17,26 +16,32 @@ class Solution {
         return false;
 }
         
-    public boolean search(char[][] board,int m,int n,int row,int col,String word,int pos,boolean[][] visited){
+    public boolean search(char[][] board,int m,int n,int row,int col,String word,int pos){
         if(row < 0 || col < 0 || row >= m || col >= n || pos >= word.length() 
-           || board[row][col] != word.charAt(pos) || visited[row][col] == true )
+           || board[row][col] != word.charAt(pos) || board[row][col] == '.' )
             return false;
         
         if(pos == word.length() -1 && board[row][col] == word.charAt(pos))
             return true;
         
-        visited[row][col] = true;
+        char temp = board[row][col];
+        board[row][col] = '.';
         
         // left
-        boolean left  = search(board,m,n,row,col-1,word,pos+1,visited);
+        boolean left  = search(board,m,n,row,col-1,word,pos+1);
         //right
-        boolean right  = search(board,m,n,row,col+1,word,pos+1,visited);
+        boolean right  = search(board,m,n,row,col+1,word,pos+1);
         //up
-        boolean up  = search(board,m,n,row-1,col,word,pos+1,visited);
+        boolean up  = search(board,m,n,row-1,col,word,pos+1);
         //down
-        boolean down  = search(board,m,n,row+1,col,word,pos+1,visited);
+        boolean down  = search(board,m,n,row+1,col,word,pos+1);
         
-        visited[row][col] = false;
+        
+        //backtracking 
+        //lets say found next required letter in board[row][col] , but further letters not present from that cell
+        //and we marked that cell visited
+        //and correct path goes from that cell then it will take it as visited wont proceed.
+        board[row][col] = temp;
         
         return left || right || up || down;
         
