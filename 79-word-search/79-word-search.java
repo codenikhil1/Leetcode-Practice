@@ -29,13 +29,13 @@ class Solution {
         board[row][col] = '.';
         
         // left
-        boolean left  = search(board,m,n,row,col-1,word,pos+1);
+        boolean ans  = search(board,m,n,row,col-1,word,pos+1);
         //right
-        boolean right  = search(board,m,n,row,col+1,word,pos+1);
+        ans  = ans || search(board,m,n,row,col+1,word,pos+1);
         //up
-        boolean up  = search(board,m,n,row-1,col,word,pos+1);
+        ans  = ans || search(board,m,n,row-1,col,word,pos+1);
         //down
-        boolean down  = search(board,m,n,row+1,col,word,pos+1);
+        ans = ans || search(board,m,n,row+1,col,word,pos+1);
         
         
         //backtracking 
@@ -44,7 +44,7 @@ class Solution {
         //and correct path goes from that cell then it will take it as visited wont proceed.
         board[row][col] = temp;
         
-        return left || right || up || down;
+        return ans;
         
     }
         
