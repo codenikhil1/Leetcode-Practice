@@ -53,6 +53,21 @@ class Solution {
         return kansAlgo(queue,V,adj,visited,inDegree);
     }
     
+    /*
+    Kans Algo - 
+        1.Calculate inDegree of all vertexs.
+        2.Add element in queue, whos inDegree in zero.
+        3.Remove vertex from queue.
+        4.If that element is visited then skip steps 4 to 7.
+        5.Interate over neighboures of that queue.
+        6.reduce inDegree of each element by 1 and if inDegree becomes 0 then add that element to the queue.
+        7.repeat step 3 to 6.
+        
+        8.check if there is a unVisited elements ? if so,then return true.
+    
+    
+    */
+    
     public boolean kansAlgo(Queue<Integer> queue,int V, ArrayList<ArrayList<Integer>> adj,
     boolean visited[],int[] inDegree){
         
