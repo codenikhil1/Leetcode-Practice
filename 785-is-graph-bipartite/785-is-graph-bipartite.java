@@ -1,8 +1,16 @@
+class Pair{
+    
+    int vertex;
+    int color;
+    
+    Pair(int vertex,int color){
+        this.vertex = vertex;
+        this.color = color;
+    }
+}
+
 class Solution {
     
-    /*
-
-    */
     
     public boolean isBipartite(int[][] graph) {
         
@@ -21,7 +29,7 @@ class Solution {
             
             //our logic here
             //dfs on each vertex 
-            if(!hasEvenCycle(graph,currentVertex,colors,0))
+            if(!hasEvenCycleUsingBFS(graph,currentVertex,colors,0))
                 return false;
             
             
@@ -29,6 +37,35 @@ class Solution {
         
         return true;
        
+    }
+    
+    public boolean hasEvenCycleUsingBFS(int[][] graph,int vertex,int[] colors,int currentColor){
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(vertex,0));
+        
+        while(!queue.isEmpty()){
+            Pair currentPair = queue.remove();
+            int Currentvertex = currentPair.vertex;
+            int color = currentPair.color;
+            
+            if(colors[Currentvertex] != -1){
+                
+                if(colors[Currentvertex] != color) 
+                    return false;
+                
+            }else{
+                
+                colors[Currentvertex] = color;
+                
+                for(int neigh : graph[Currentvertex]){
+                    queue.add(new Pair(neigh,1-color));
+                }
+            }
+            
+            
+        }
+        
+        return true;
     }
     
     public boolean hasEvenCycle(int[][] graph,int currentVertex,int[] colors,int currentColor){
