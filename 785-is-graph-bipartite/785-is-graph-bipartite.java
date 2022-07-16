@@ -39,25 +39,25 @@ class Solution {
        
     }
     
-    public boolean hasEvenCycleUsingBFS(int[][] graph,int vertex,int[] colors,int currentColor){
+    public boolean hasEvenCycleUsingBFS(int[][] graph,int currentVertex,int[] colors,int currentColor){
         Queue<Pair> queue = new LinkedList<>();
-        queue.add(new Pair(vertex,0));
+        queue.add(new Pair(currentVertex,0));
         
         while(!queue.isEmpty()){
             Pair currentPair = queue.remove();
-            int Currentvertex = currentPair.vertex;
+            int vertex = currentPair.vertex;
             int color = currentPair.color;
             
-            if(colors[Currentvertex] != -1){
+            if(colors[vertex] != -1){
                 
-                if(colors[Currentvertex] != color) 
+                if(colors[vertex] != color) 
                     return false;
                 
             }else{
                 
-                colors[Currentvertex] = color;
+                colors[vertex] = color;
                 
-                for(int neigh : graph[Currentvertex]){
+                for(int neigh : graph[vertex]){
                     queue.add(new Pair(neigh,1-color));
                 }
             }
